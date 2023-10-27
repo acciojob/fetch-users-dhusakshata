@@ -22,7 +22,7 @@ function App() {
         const data = await response.json();
         setUserList(data.data);
       } else {
-        setError("No data found to display");
+        setError("No data found");
       }
     } catch (error) {
       setError("An error occurred while fetching data");
