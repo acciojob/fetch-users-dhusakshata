@@ -5,6 +5,7 @@ const APIURL = "https://reqres.in/api/users";
 function App() {
   const [userList, setUserList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     // Fetch user data when the component mounts
@@ -13,16 +14,18 @@ function App() {
 
   const getUsers = async () => {
     setIsLoading(true);
+    setError(null); // Reset error state
+
     try {
       const response = await fetch(APIURL);
       if (response.ok) {
         const data = await response.json();
         setUserList(data.data);
       } else {
-        console.error("No data found to display");
+        setError("No data found to display");
       }
     } catch (error) {
-      console.error("No data found to display", error);
+      setError("An error occurred while fetching data");
     } finally {
       setIsLoading(false);
     }
@@ -38,6 +41,8 @@ function App() {
       </div>
       {isLoading ? (
         <p>Loading...</p>
+      ) : error ? (
+        <p>{error}</p>
       ) : (
         <table>
           <thead>
