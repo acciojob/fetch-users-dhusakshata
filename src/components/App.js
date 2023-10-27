@@ -19,10 +19,10 @@ function App() {
         const data = await response.json();
         setUserList(data.data);
       } else {
-        console.error("Failed to fetch user data.");
+        console.error("No data found to display");
       }
     } catch (error) {
-      console.error("Error fetching user data:", error);
+      console.error("No data found to display", error);
     } finally {
       setIsLoading(false);
     }
